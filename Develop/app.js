@@ -34,6 +34,17 @@ function initialQuestions() {
                 type: 'input',
                 message: "What is the employee's email address?",
                 name: 'email',
+                validate: function (email) {
+  
+                    valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+        
+                    if (valid) {
+                        return true;
+                    } else {
+                        console.log(".  Please enter a valid email")
+                        return false;
+                    }
+                },
             },
             {
                 type: 'checkbox',
@@ -65,6 +76,7 @@ function initialQuestions() {
         })
 }
 
+
 function managerQuestions(answers) {
     inquirer
         .prompt(
@@ -95,7 +107,6 @@ function engineerQuestions(answers) {
             employees.push(engineer);
             newEmp();
         }
-
         )
 }
 
@@ -113,7 +124,6 @@ function internQuestions(answers) {
             employees.push(intern);
             newEmp();
         }
-
         )
 }
 
@@ -135,7 +145,7 @@ function newEmp() {
           });
         }
       })
-    }
+}
 
 initialQuestions();
 
