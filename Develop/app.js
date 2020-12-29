@@ -10,6 +10,134 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+var employees = [];
+
+function initialQuestions() {
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                message: "What is the employee's first name?",
+                name: 'firstname',
+            },
+            {
+                type: 'input',
+                message: "What is the employee's last name?",
+                name: 'lastname',
+            },
+            {
+                type: 'input',
+                message: "What is the employee's ID number?",
+                name: 'id',
+            },
+            {
+                type: 'input',
+                message: "What is the employee's email address?",
+                name: 'email',
+            },
+            {
+                type: 'checkbox',
+                message: "What is the employee's current role?",
+                name: "role",
+                choices: [
+                    {
+                        name: 'Manager',
+                    },
+                    {
+                        name: 'Engineer',
+                    },
+                    {
+                        name: 'Intern',
+                    },
+                ],
+            },
+
+        ])
+
+        .then((answers) => {
+            if (answers.role[0] == "Manager") {
+                managerQuestions(answers);
+            } else if (answers.role[0] == "Engineer") {
+                engineerQuestions(answers);
+            } else if (answers.role[0] == "Intern") {
+                internQuestions(answers);
+            }
+        })
+}
+
+function managerQuestions(answers) {
+    inquirer
+        .prompt(
+            {
+                type: 'input',
+                message: "What is this manager's office number?",
+                name: "officenumber",
+            },
+        )
+        .then((answers2) => {
+            const manager = new Manager(answers.firstname, answers.lastname, answers.id, answers.email, answers.role[0], answers2.officenumber);
+            employees.push(manager);
+            newEmp();
+        })
+}
+
+function engineerQuestions(answers) {
+    inquirer
+        .prompt(
+            {
+                type: 'input',
+                message: "What is this engineer's GitHub username?",
+                name: "github",
+            },
+        )
+        .then((answers2) => {
+            const engineer = new Engineer(answers.firstname, answers.lastname, answers.id, answers.email, answers.role[0], answers2.github);
+            employees.push(engineer);
+            newEmp();
+        }
+
+        )
+}
+
+function internQuestions(answers) {
+    inquirer
+        .prompt(
+            {
+                type: 'input',
+                message: "What is this intern's university?",
+                name: "school",
+            },
+        )
+        .then((answers2) => {
+            const intern = new Intern(answers.firstname, answers.lastname, answers.id, answers.email, answers.role[0], answers2.school);
+            employees.push(intern);
+            newEmp();
+        }
+
+        )
+}
+
+function newEmp() {
+    inquirer.prompt([
+      {
+        type: 'confirm',
+        message: 'Do you want to add another employee?',
+        name: 'newEmp',
+      },
+    ],
+    )
+      .then((answers) => {
+        if (answers.newEmp == true) {
+          initialQuestions();
+        } else {
+          fs.writeFile(outputPath, render(employees), (err) => {
+            if (err) throw err;
+          });
+        }
+      })
+    }
+
+initialQuestions();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
