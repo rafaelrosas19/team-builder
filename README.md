@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a Node CLI application that uses the Inquirer and Jest packages. The goal of this application is to allow a user to create a webpage that lists all of their employee's relevant information. This information includes whether an employee is either a manager, engineer, or intern. The webpage will also list information that is specific to the employee's role such as office number, github username, or school. All of this information will be concentrated in one place for quick access. 
+This is a Node CLI application that uses the Inquirer and Jest packages. The goal of this application is to allow a user to create a webpage that lists all of their employee's relevant information for quick access. This includes whether an employee is either a manager, engineer, or intern. The webpage will also list information that is specific to the employee's role such as office number, github username, or school. 
 
 ## Installation
 
@@ -14,7 +14,7 @@ https://rafaelrosas19.github.io/
 
 ## Usage
 
-To run the application make sure that you are in the Develop directory and use your integrated terminal to type `node app.js`. The terminal will ask a series of questions to the user in order to find out whether the employee is a manager, engineer, or intern. The application will then push the information provided by the user to an array of employees. This array will finally be rendered using an `htmlRenderer.js` and create the final `team.html` file which will display all of the information.
+To run the application make sure that you are in the Develop directory and use your integrated terminal to type `node app.js`. The terminal will ask a series of questions to the user in order to find out whether the employee is a manager, engineer, or intern. The application will push the information to an array of Employees. This array will be rendered using an `htmlRenderer.js` and create the final `team.html` file which will display all of the information.
 
 ## Credits 
 
