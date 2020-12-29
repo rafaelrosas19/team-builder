@@ -17,13 +17,8 @@ function initialQuestions() {
         .prompt([
             {
                 type: 'input',
-                message: "What is the employee's first name?",
-                name: 'firstname',
-            },
-            {
-                type: 'input',
-                message: "What is the employee's last name?",
-                name: 'lastname',
+                message: "What is the employee's name?",
+                name: 'name',
             },
             {
                 type: 'input',
@@ -87,7 +82,7 @@ function managerQuestions(answers) {
             },
         )
         .then((answers2) => {
-            const manager = new Manager(answers.firstname, answers.lastname, answers.id, answers.email, answers.role[0], answers2.officenumber);
+            const manager = new Manager(answers.name, answers.id, answers.email, answers.role[0], answers2.officenumber);
             employees.push(manager);
             newEmp();
         })
@@ -103,7 +98,7 @@ function engineerQuestions(answers) {
             },
         )
         .then((answers2) => {
-            const engineer = new Engineer(answers.firstname, answers.lastname, answers.id, answers.email, answers.role[0], answers2.github);
+            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.role[0], answers2.github);
             employees.push(engineer);
             newEmp();
         }
@@ -120,7 +115,7 @@ function internQuestions(answers) {
             },
         )
         .then((answers2) => {
-            const intern = new Intern(answers.firstname, answers.lastname, answers.id, answers.email, answers.role[0], answers2.school);
+            const intern = new Intern(answers.name, answers.id, answers.email, answers.role[0], answers2.school);
             employees.push(intern);
             newEmp();
         }
